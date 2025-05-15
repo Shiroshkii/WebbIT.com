@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lab Exercise 13</title>
+    <!-- Include jQuery via CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .menu {
+            background-color: #f4f4f4;
+            padding: 20px;
+            border: 1px solid #ccc;
+            width: 300px;
+        }
+        #submenu a {
+            display: block;
+            margin: 5px 0;
+            color: #007bff;
+            text-decoration: none;
+        }
+        #submenu a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <!-- Menu Structure -->
+    <div class="menu">
+        <div id="item">Drop-Down</div>
+        <div id="submenu" style="display: none;">
+            <a href="https://google.com" target="_blank">Google</a>
+            <a href="https://facebook.com" target="_blank">Facebook</a>
+            <a href="https://twitter.com" target="_blank">Twitter</a>
+            <a href="https://linkedin.com" target="_blank">LinkedIn</a>
+            <a href="https://youtube.com" target="_blank">YouTube</a>
+        </div>
+    </div>
+    <!-- Internal jQuery Script -->
+    <script>
+        $(document).ready(function() {
+            // Toggle submenu
+            $("#item").click(function() {
+                $("#submenu").slideToggle(500);
+            });
+
+            // Add hover effect to menu links
+            $("#submenu a").hover(
+                function() {
+                    $(this).css("color", "red");
+                },
+                function() {
+                    $(this).css("color", "#007bff");
+                }
+            );
+        });
+    </script>
+</body>
+</html>

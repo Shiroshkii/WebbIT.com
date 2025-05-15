@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <!-- Basic -->
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <!-- Mobile Metas -->
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+  <!-- Site Metas -->
+  <meta name="keywords" content="" />
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+
+  <title>Webbit</title>
+
+  <!-- bootstrap core css -->
+  <link rel="stylesheet" type="text/css" href="css/bootstrap.css" />
+
+  <!-- fonts style -->
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Poppins:400,600,700&display=swap" rel="stylesheet" />
+
+  <!-- Custom styles for this template -->
+  <link href="css/style.css" rel="stylesheet" />
+  <!-- responsive style -->
+  <link href="css/responsive.css" rel="stylesheet" />
+</head>
+
+<body class="sub_page">
+  <div class="hero_area">
+    <!-- header section strats -->
+    <div class="hero_bg_box">
+      <div class="img-box">
+        <img src="images/forest1.jpg" alt="">
+      </div>
+    </div>
+
+    <header class="header_section">
+      <div class="header_top">
+        <div class="container-fluid">
+          <div class="contact_link-container">
+          <marquee><img src="images/carrot.gif" alt="" class="logo"><img src="images/rabbit.gif" alt="" class="logo"></marquee>
+          </div>
+        </div>
+      </div>
+      <div class="header_bottom">
+        <div class="container-fluid">
+          <nav class="navbar navbar-expand-lg custom_nav-container">
+            <a class="navbar-brand" href="index.html">
+              <span>
+                <img src="images/rabbit.gif" alt="" class="logo">
+                Webbit
+              </span>
+            </a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+              <span class=""></span>
+            </button>
+
+            <div class="collapse navbar-collapse ml-auto" id="navbarSupportedContent">
+              <ul class="navbar-nav">
+                <li class="nav-item ">
+                  <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="about.html"> About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="service.html"> Tutorials </a>
+                </li>
+                <li class="nav-item active">
+                  <a class="nav-link" href="basic.html"> lessons (html) </a>
+                  <ul class="dropdown">
+                    <li><a href="lesson1.2.html">Lesson 1.2</a></li>
+                    <li><a href="lesson2.1.html">Lesson 2.1</a></li>
+                    <li><a href="lesson2.2.html">Lesson 2.2</a></li>
+                    <li><a href="lesson2.3.html">Lesson 2.3</a></li>
+                    <li><a href="lesson3.1.html">Lesson 3.1</a></li>
+                    <li><a href="lesson3.2.html">Lesson 3.2</a></li>
+                    <li><a href="lesson4.1html">Lesson 4.1</a></li>
+                    <li><a href="lesson5.1.html">Lesson 5.1</a></li>
+                    <li><a href="lesson5.2.html">Lesson 5.2</a></li>
+                  </ul>
+                </li>
+              <li class="nav-item active">
+                <a class="nav-link" href="basic2.html"> lessons (css) </a>
+                <ul class="dropdown">
+                  <li><a href="lessons1.2css.html">Lesson 1.2</a></li>
+                  <li><a href="lessons2.1css.html">Lesson 2.1</a></li>
+                  <li><a class="active" href="lessons2.2css.html">Lesson 2.2</a></li>
+                </ul>
+              </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="contact.html">Contact us</a>
+                </li>
+              </ul>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </header>
+    <!-- end header section -->
+  </div>
+
+  <!-- team section -->
+  <section class="team_section layout_padding3">
+    <div class="container">
+      <div class="heading_container1 heading_cente">
+        <h2>Lesson 5.1: CSS Links Text Decoration</h2>
+
+<h5>Text Decoration Property</h5>
+<p>
+  In CSS, the <code>text-decoration</code> property is used to set the decoration of text in an element.
+  When dealing with links, this property is commonly used to control how the text appears in terms of underlines, overlines, and strikethroughs.
+</p>
+
+<h3>Adding Underline to a Text:</h3>
+<pre>
+&lt;style&gt;
+a {
+  text-decoration: underline;
+}
+&lt;/style&gt;
+&lt;body&gt;
+  &lt;a href="#"&gt;This link is underlined.&lt;/a&gt;
+&lt;/body&gt;
+</pre>
+<h3>Output:</h3>
+<a href="#" style="text-decoration: underline;">This link is underlined.</a>
+
+<h3>Applying Overline, Line-Through, and Underline:</h3>
+<pre>
+&lt;style&gt;
+a {
+  text-decoration: overline line-through underline;
+}
+&lt;/style&gt;
+&lt;body&gt;
+  &lt;a href="#"&gt;This link has multiple decorations.&lt;/a&gt;
+&lt;/body&gt;
+</pre>
+<h3>Output:</h3>
+<a href="#" style="text-decoration: overline line-through underline;">This link has multiple decorations.</a>
+
+<h3>Customizing Text Color:</h3>
+<pre>
+&lt;style&gt;
+a {
+  text-decoration: underline;
+  color: blue;
+}
+&lt;/style&gt;
+&lt;body&gt;
+  &lt;a href="#"&gt;This is a colored and underlined link.&lt;/a&gt;
+&lt;/body&gt;
+</pre>
+<h3>Output:</h3>
+<a href="#" style="text-decoration: underline; color: blue;">This is a colored and underlined link.</a>
+
+<h3>Customizing Text Decoration Style:</h3>
+<pre>
+&lt;style&gt;
+a {
+  text-decoration: underline;
+  text-decoration-style: dashed;
+}
+&lt;/style&gt;
+&lt;body&gt;
+  &lt;a href="#"&gt;This link has a dashed underline.&lt;/a&gt;
+&lt;/body&gt;
+</pre>
+<h3>Output:</h3>
+<a href="#" style="text-decoration: underline; text-decoration-style: dashed;">This link has a dashed underline.</a>
+
+<h3>Customizing Text Decoration Thickness:</h3>
+<pre>
+&lt;style&gt;
+a {
+  text-decoration: underline;
+  text-decoration-thickness: 3px;
+}
+&lt;/style&gt;
+&lt;body&gt;
+  &lt;a href="#"&gt;This link has a thick underline.&lt;/a&gt;
+&lt;/body&gt;
+</pre>
+<h3>Output:</h3>
+<a href="#" style="text-decoration: underline; text-decoration-thickness: 3px;">This link has a thick underline.</a>
+
+<h3>Combining Multiple Properties:</h3>
+<p>You can combine <code>text-decoration</code> with other related properties for even more control:</p>
+<pre>
+&lt;style&gt;
+a {
+  text-decoration: underline dotted;
+  text-decoration-color: red;
+  text-decoration-thickness: 2px;
+}
+&lt;/style&gt;
+&lt;body&gt;
+  &lt;a href="#"&gt;This link combines multiple properties.&lt;/a&gt;
+&lt;/body&gt;
+</pre>
+<h3>Output:</h3>
+<a href="#" style="text-decoration: underline dotted; text-decoration-color: red; text-decoration-thickness: 2px;">This link combines multiple properties.</a>
+
+<!-- Next Button -->
+<button id="nextBtn">Next</button>
+
+    </div>
+    </div>
+  </section>
+
+  <!-- end team section -->
+
+  <!-- info section -->
+  <section class="info_section ">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-3">
+          <div class="info_logo">
+            <a class="navbar-brand" href="index.html">
+              <span>
+                Webbit
+              </span>
+            </a>
+            <p>
+              Webbit is your go-to resource for learning the basics of web development.
+            </p>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_links">
+            <h5>
+              Practice
+            </h5>
+            <ul>
+              <li>
+                <a href="">
+                  HTML
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  CSS
+                </a>
+              </li>
+              <li>
+                <a href="">
+                  JAVASCRIPT
+                </a>
+              </li>
+
+            </ul>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_info">
+            <h5>
+              Contact Us
+            </h5>
+          </div>
+          <div class="info_contact">
+            <a href="" class="">
+              <i class="fa fa-map-marker" aria-hidden="true"></i>
+              <span>
+                Pasig City
+              </span>
+            </a>
+            <a href="" class="">
+              <i class="fa fa-phone" aria-hidden="true"></i>
+              <span>
+                Call : 09167518638
+              </span>
+            </a>
+            <a href="" class="">
+              <i class="fa fa-envelope" aria-hidden="true"></i>
+              <span>
+                poarch172@gmail.com
+              </span>
+            </a>
+          </div>
+        </div>
+        <div class="col-md-3">
+          <div class="info_form ">
+            <div class="social_box">
+              <a href="">
+                <i class="fa fa-facebook" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-twitter" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-youtube" aria-hidden="true"></i>
+              </a>
+              <a href="">
+                <i class="fa fa-instagram" aria-hidden="true"></i>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- end info_section -->
+
+
+
+
+  <!-- footer section -->
+  <footer class="container-fluid footer_section">
+    <p>
+      &copy; <span id="currentYear"></span> Maked by:
+      <a href="https://html.design/">Group 1</a>
+    </p>
+  </footer>
+
+<script>
+// JavaScript to go to the next page
+document.getElementById("nextBtn").addEventListener("click", function() {
+    window.location.href = "lessons5.2css.html"; // Replace with the next page's URL
+});
+</script>
+  <!-- footer section -->
+  <script src="js/script.js"></script>
+  <script src="js/jquery-3.4.1.min.js"></script>
+  <script src="js/bootstrap.js"></script>
+  <script src="js/custom.js"></script>
+</body>
+
+</html>

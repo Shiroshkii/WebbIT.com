@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step-Based Progress Bar with Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f9;
+            padding: 0 10px; /* Padding for smaller screens */
+            overflow: hidden; /* Prevent body overflow */
+        }
+
+        .progress-container {
+            width: 100%;
+            max-width: 600px;
+            background-color: #e0e0e0;
+            border-radius: 30px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .progress-bar {
+            height: 40px;
+            width: 0;
+            background: linear-gradient(90deg, #6a11cb, #2575fc);
+            border-radius: 30px;
+            transition: width 0.5s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
+            position: relative;
+        }
+
+        #progress-text {
+            position: absolute;
+        }
+
+        .controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column; /* Stack buttons vertically on small screens */
+        }
+
+        .controls button {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #6a11cb;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: background-color 0.3s ease;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .controls button:hover {
+            background-color: #2575fc;
+        }
+
+        .complete-btn {
+            padding: 10px 20px;
+            margin: 20px;
+            background-color: grey;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: not-allowed;
+            opacity: 0.7;
+            transition: background-color 0.3s ease, opacity 0.3s ease;
+            width: 100%;
+            max-width: 200px;
+        }
+
+        .complete-btn.active {
+            background-color: green;
+            cursor: pointer;
+            opacity: 1;
+        }
+
+        .complete-btn.active:hover {
+            background-color: darkgreen;
+        }
+
+        .popup-quiz {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 90%;
+            max-width: 500px;
+            padding: 20px;
+            background-color: white;
+            border: 2px solid #2575fc;
+            border-radius: 10px;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            overflow-y: auto; /* Handle overflow with scroll */
+            max-height: 80vh; /* Ensure popup doesn't exceed viewport height */
+        }
+
+        .popup-quiz h3 {
+            margin: 0 0 10px 0;
+            font-size: 22px; /* Adjust font size for readability on small screens */
+        }
+
+        .popup-quiz p {
+            margin: 5px 0;
+            font-size: 16px; /* Adjust font size for readability on small screens */
+        }
+
+        .popup-quiz button {
+            background-color: #6a11cb;
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: block;
+            margin: 5px auto;
+            width: 100%; /* Make buttons full width for better touch interaction */
+        }
+
+        .popup-quiz button:hover {
+            background-color: #2575fc;
+        }
+
+        .exit-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: #ff4d4d;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 5px 10px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .exit-btn:hover {
+            background-color: #cc0000;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .feedback.correct {
+            color: green;
+        }
+
+        .feedback.incorrect {
+            color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress-bar">
+            <span id="progress-text">0%</span>
+        </div>
+    </div>
+    <div class="controls">
+        <button onclick="openQuiz()">Start Quiz</button>
+    </div>
+
+    <!-- Complete Button -->
+    <button class="complete-btn" id="complete-btn" disabled onclick="nextPage()">Next</button>
+
+    <!-- Popup Quiz -->
+    <div class="popup-quiz" id="popup-quiz">
+        <button class="exit-btn" onclick="hideQuiz()">X</button>
+        <h3>Quiz</h3>
+        <div id="quiz-questions">
+            <p>1. What does HTML stand for?</p>
+            <button onclick="answerQuestion(1, 'a')">a. Hypertext Markup Language</button>
+            <button onclick="answerQuestion(1, 'b')">b. Hypertext Media Language</button>
+            <button onclick="answerQuestion(1, 'c')">c. High-Level Text</button>
+            <button onclick="answerQuestion(1, 'd')">d. Hyperlink Text Markup Language</button>
+            <div id="feedback-1" class="feedback"></div>
+
+            <p>2. Who wrote the initial HTML version?</p>
+            <button onclick="answerQuestion(2, 'A')">A. Tim Cook</button>
+            <button onclick="answerQuestion(2, 'B')">B. Tim Burners-Lee</button>
+            <button onclick="answerQuestion(2, 'C')">C. Tim Berners-Lee</button>
+            <button onclick="answerQuestion(2, 'D')">D. Tim Bruce-Lee</button>
+            <div id="feedback-2" class="feedback"></div>
+
+            <p>3. Which tag is used to create an unordered list in HTML?</p>
+            <button onclick="answerQuestion(3, 'A')">A. &lt;list&gt;</button>
+            <button onclick="answerQuestion(3, 'B')">B. &lt;ul&gt;</button>
+            <button onclick="answerQuestion(3, 'C')">C. &lt;ol&gt;</button>
+            <button onclick="answerQuestion(3, 'D')">D. &lt;item&gt;</button>
+            <div id="feedback-3" class="feedback"></div>
+
+            <p>4. Which tag is used to define a header in HTML?</p>
+            <button onclick="answerQuestion(4, 'A')">A. &lt;head&gt;</button>
+            <button onclick="answerQuestion(4, 'B')">B. &lt;header&gt;</button>
+            <button onclick="answerQuestion(4, 'C')">C. &lt;h1&gt;</button>
+            <button onclick="answerQuestion(4, 'D')">D. &lt;title&gt;</button>
+            <div id="feedback-4" class="feedback"></div>
+
+            <p>5. Where can &lt;title&gt; be found?</p>
+            <button onclick="answerQuestion(5, 'A')">A. &lt;body&gt;</button>
+            <button onclick="answerQuestion(5, 'B')">B. &lt;head&gt;</button>
+            <button onclick="answerQuestion(5, 'C')">C. &lt;header&gt;</button>
+            <button onclick="answerQuestion(5, 'D')">D. &lt;h1&gt;</button>
+            <div id="feedback-5" class="feedback"></div>
+        </div>
+        <button onclick="submitQuiz()">Submit Quiz</button>
+        <div id="quiz-feedback" class="feedback" style="display: none;"></div>
+    </div>
+
+    <script>
+        let progress = 0;
+        let step = 10; // Step size for progress
+        let quizAnswers = {}; // Store user answers
+        const correctAnswers = {
+            1: 'a', // HTML stands for Hypertext Markup Language
+            2: 'C', // Tim Berners-Lee wrote the initial HTML version
+            3: 'B', // <ul> is used to create an unordered list
+            4: 'C', // <h1> is used to define a header
+            5: 'B'  // <title> is found in <head>
+        };
+
+        function openQuiz() {
+            document.getElementById('popup-quiz').style.display = 'block';
+        }
+
+        function hideQuiz() {
+            document.getElementById('popup-quiz').style.display = 'none';
+        }
+
+        function answerQuestion(questionNumber, answer) {
+            quizAnswers[questionNumber] = answer;
+            const feedbackElement = document.getElementById(`feedback-${questionNumber}`);
+
+            if (answer === correctAnswers[questionNumber]) {
+                feedbackElement.textContent = 'Correct!';
+                feedbackElement.classList.add('correct');
+                feedbackElement.classList.remove('incorrect');
+            } else {
+                feedbackElement.textContent = 'Incorrect. Try again!';
+                feedbackElement.classList.add('incorrect');
+                feedbackElement.classList.remove('correct');
+            }
+        }
+
+        function checkQuizCompletion() {
+            let allCorrect = true;
+
+            for (let i = 1; i <= 5; i++) {
+                if (quizAnswers[i] !== correctAnswers[i]) {
+                    allCorrect = false;
+                    break;
+                }
+            }
+
+            if (allCorrect) {
+                enableNextButton();
+            } else {
+                document.getElementById('complete-btn').disabled = true;
+                document.getElementById('complete-btn').classList.remove('active');
+            }
+        }
+
+        function submitQuiz() {
+            const allCorrect = Object.keys(correctAnswers).every(questionNumber =>
+                quizAnswers[questionNumber] === correctAnswers[questionNumber]);
+
+            if (allCorrect) {
+                document.getElementById('quiz-feedback').innerHTML = 'All answers are correct! Quiz completed successfully.';
+                document.getElementById('quiz-feedback').style.display = 'block';
+                updateProgressBar(); // Update progress only after quiz completion
+                hideQuiz(); // Close the quiz popup
+            } else {
+                document.getElementById('quiz-feedback').innerHTML = 'Please answer all questions correctly.';
+                document.getElementById('quiz-feedback').style.display = 'block';
+            }
+        }
+
+        function updateProgressBar() {
+            if (progress < step) {
+                progress += step; // Increment by step
+                document.getElementById('progress-bar').style.width = progress + '%';
+                document.getElementById('progress-text').textContent = progress + '%';
+                document.getElementById('complete-btn').disabled = true;
+                document.getElementById('complete-btn').classList.remove('active');
+            }
+        }
+
+        function enableNextButton() {
+            document.getElementById('complete-btn').disabled = false;
+            document.getElementById('complete-btn').classList.add('active');
+        }
+
+        function nextPage() {
+            if (document.getElementById('complete-btn').classList.contains('active')) {
+                window.location.href = 'next-page.html'; // Replace 'next-page.html' with the URL of the next page
+            }
+        }
+
+        // Listen to changes in quiz answers and automatically check completion status
+        document.querySelectorAll('.popup-quiz button').forEach(button => {
+            button.addEventListener('click', () => checkQuizCompletion());
+        });
+    </script>
+</body>
+</html>
